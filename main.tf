@@ -1,12 +1,13 @@
 
 
 provider "aws" {
-  region     = "us-west-2"
-  
+  region  = "${var.region}"
+  version = "~> 2.0"
 }
 
 
-resource "aws_instance" "example" {
-  ami           = "ami-0d70546e43a941d70"
-  instance_type = "t2.micro"
-}
+
+resource "aws_instance" "web1" {
+   ami           = "${lookup(var.ami_id, var.region)}"
+   instance_type = "t2.micro"
+ }
